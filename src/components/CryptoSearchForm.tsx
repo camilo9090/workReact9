@@ -13,7 +13,7 @@ export default function CryptoSearchForm() {
                     <option value="">-- Seleccione--</option>
                     {currencies.map((currency) => (
 
-                        <option value={currency.code}>{currency.name}</option>
+                        <option key={currency.code} value={currency.code}>{currency.name}</option>
                     ))}
 
                 </select>
