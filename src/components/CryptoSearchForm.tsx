@@ -9,6 +9,7 @@ export default function CryptoSearchForm() {
 
 
     const cryptoCurrencies = useCryptoStore((state) => state.cryptoCurrencies)
+    const fetchData = useCryptoStore((state) => state.fetchData)
     const [pair, setpair] = useState<PairSchemas>({
 
         currency: '',
@@ -35,7 +36,7 @@ export default function CryptoSearchForm() {
 
         setError('')
 
-        //Consultar la API
+        fetchData(pair)
 
     }
 
