@@ -2,7 +2,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { CryptoCurrency, CryptoPrice, PairSchemas } from './types';
-import { getCryptos,fetchCryptoPrice } from './services/CryptoServices';
+import { getCryptos, fetchCryptoPrice } from './services/CryptoServices';
 
 type CryptoStore = {
     cryptoCurrencies: CryptoCurrency[]
@@ -14,7 +14,14 @@ type CryptoStore = {
 
 export const useCryptoStore = create<CryptoStore>()(devtools((set) => ({
     cryptoCurrencies: [],
-    result:{} as CryptoPrice,
+    result: {
+        IMAGEURL: '',
+        PRICE: '',
+        HIGHDAY: '',
+        LOWDAY: '',
+        CHANGEPCT24HOUR: '',
+        LASTUPDATE: ''
+    },
     fetchCryptos: async () => {
         const cryptoCurrencies = await getCryptos()
         set(() => ({
@@ -26,8 +33,8 @@ export const useCryptoStore = create<CryptoStore>()(devtools((set) => ({
     fetchData: async (pair) => {
         fetchCryptoPrice(pair)
 
-        const result= await fetchCryptoPrice(pair)
-        set(()=>({
+        const result = await fetchCryptoPrice(pair)
+        set(() => ({
             result
         }))
     }
